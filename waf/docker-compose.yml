@@ -1,0 +1,19 @@
+services:
+  backend:
+    image: kennethreitz/httpbin
+    container_name: waf-backend
+
+  waf:
+    image: owasp/modsecurity-crs:nginx
+    container_name: modsecurity-waf
+    environment:
+      BACKEND: "http://backend:80"
+      PORT: "8080"
+      MODSEC_RULE_ENGINE: "On"
+      BLOCKING_PARANOIA: "1"
+      ANOMALY_INBOUND: "5"
+      ANOMALY_OUTBOUND: "4"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend

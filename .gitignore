@@ -8,3 +8,4 @@ data/*.csv
 *.joblib
 .ipynb_checkpoints/
 .DS_Store
+logs/
